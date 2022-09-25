@@ -3,34 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Allowance updater example</title>
+    <title>Allowance updater example 2</title>
 </head>
 <body>
-    <label for="shopping-check">Has the shopping been done?</label>
-    <input type="checkbox" id="shopping-check">
+    <label for="job-chec1k">Has the job 1 been done?($5)</label>
+    <input type="checkbox" id="job-check1"><br>
+    <label for="job-check2">Has the job 2 been done?($2)</label>
+    <input type="checkbox" id="job-check2"><br>
+    <label for="job-check3">Has the job 3 been done?($6)</label>
+    <input type="checkbox" id="job-check3"><br>
+    <label for="job-check4">Has the job 4 been done?($10)</label>
+    <input type="checkbox" id="job-check4"><br>
 
-    <p></p>
+    <p >a</p>
+    <p >b</p>
+    <p id="p11">c</p>
 
     <script>
-        const checkBox = document.querySelector('input');
-        const para = document.querySelector('p');
-        let shoppingDone = false;
+        const checkBox_job1 = document.querySelector('input#job-check1');
+        const checkBox_job2 = document.querySelector('input#job-check2');
+        const checkBox_job3 = document.querySelector('input#job-check3');
+        const checkBox_job4 = document.querySelector('input#job-check4');
+        const para = document.querySelector('p#p11');
+        let job1done = 0;
+        let job2done = 0;
+        let job3done = 0;
+        let job4done = 0;
+        
+        let childsAllowance=0;
 
-        checkBox.addEventListener('change', () => {
-            checkBox.disabled = true;
-            shoppingDone = true;
+        checkBox_job1.addEventListener('change', () => {
+            checkBox_job1.disabled = true;
+            job1done = 5;
+            updateAllowance();
+        })
+
+        checkBox_job2.addEventListener('change', () => {
+            checkBox_job2.disabled = true;
+            job2done = 2;
+            updateAllowance();
+        })
+
+        checkBox_job3.addEventListener('change', () => {
+            checkBox_job3.disabled = true;
+            job3done = 6;
+            updateAllowance();
+        })
+
+        checkBox_job4.addEventListener('change', () => {
+            checkBox_job4.disabled = true;
+            job4done = 10;
             updateAllowance();
         })
 
         function updateAllowance() {
-            let childsAllowance;
-            if (shoppingDone === true) {
-                childsAllowance = 10;
-            } else {
-                childsAllowance = 5;
+            childsAllowance = job1done + job2done + job3done + job4done ;
+            para.textContent = `Child has earned \$${childsAllowance} this week.`;
+            if(job1done&&job2done&&job3done&&job4done){
+                childsAllowance+=10
+                para.textContent = `Child has earned \$${childsAllowance} this week. \n
+                (+$10 for all jobs being done)`;
             }
 
-            para.textContent = `Child has earned \$${childsAllowance} this week.`;
         }
 
         updateAllowance();
